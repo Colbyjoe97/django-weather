@@ -2,15 +2,32 @@
     margin: 0px;
     padding: 0px;
 }
-
 .wrapper {
     padding: 20px 20% 0px 20%;
     min-height: 100vh;
-    background-color: rgb(144, 202, 224);
+    /* background: rgb(0,155,255); */
+    /* background: linear-gradient(0deg, rgba(0,155,255,1) 0%, rgba(221,250,252,1) 49%, rgba(0,155,255,1) 100%); */
 }
-.test{
+.header{
+    display: flex;
+    background-color: cyan;
+    padding: 10px;
+    height: 70px;
+    align-items:center;
+    justify-content: space-between;
+}
+.header-right{
+    align-items:center;
+    display: flex;
+    margin-top: 10px;
+    width: 200px;
+    justify-content: space-between;
+}
+.weather{
+    margin-top: 40vh;
     text-align: center;
     background-color: whitesmoke;
     border-radius: 15px;
     padding: 10px;
+    box-shadow: 4px 4px 4px 4px black;
 }
