@@ -5,29 +5,35 @@
 .wrapper {
     padding: 20px 20% 0px 20%;
     min-height: 100vh;
-    /* background: rgb(0,155,255); */
-    /* background: linear-gradient(0deg, rgba(0,155,255,1) 0%, rgba(221,250,252,1) 49%, rgba(0,155,255,1) 100%); */
+    display: flex;
+    justify-content: space-between;
 }
 .header{
     display: flex;
-    background-color: cyan;
-    padding: 10px;
-    height: 70px;
     align-items:center;
     justify-content: space-between;
+    font-size: larger;
+    padding: 10px 20% 10px 20%;
+    height: 70px;
+    background-color: rgb(26, 190, 163);
+    color: white;
 }
 .header-right{
-    align-items:center;
     display: flex;
-    margin-top: 10px;
-    width: 200px;
+    align-items:center;
     justify-content: space-between;
+    text-align: right;
+}
+.header-right a {
+    color: white;
+    text-decoration: none;
 }
 .weather{
-    margin-top: 40vh;
     text-align: center;
-    background-color: whitesmoke;
-    border-radius: 15px;
-    padding: 10px;
-    box-shadow: 4px 4px 4px 4px black;
+}
+#button {
+    background-color: rgb(51, 189, 235);
+    color: white;
+    padding: 2px 5px 2px 5px;
+    border: 0px;
 }
