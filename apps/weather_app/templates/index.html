@@ -32,6 +32,14 @@
             <h3>favorites placeholder</h3>
             <h3>favorites placeholder</h3>
         </div>
+        {% if messages %}
+            <div>
+            {% for message in messages %}
+                <p class='text-danger'>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        
         {% for user in users %}
             <p>{{user.first_name}} {{user.last_name}}</p>
         {% endfor %}
