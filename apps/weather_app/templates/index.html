@@ -32,6 +32,9 @@
             <h3>favorites placeholder</h3>
             <h3>favorites placeholder</h3>
         </div>
+        {% for user in users %}
+            <p>{{user.first_name}} {{user.last_name}}</p>
+        {% endfor %}
         <form action="register" method="POST">
             {% csrf_token %}
             <p>First Name:</p>
