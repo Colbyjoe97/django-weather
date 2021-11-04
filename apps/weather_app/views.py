@@ -18,8 +18,8 @@ def register(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        request.session['errors'] = 1
+        return redirect('/login')
     else:
         hashedPass = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
         User.objects.create(first_name=request.POST['fname'],last_name=request.POST['lname'],email=request.POST['email'],password=hashedPass)
-    return redirect("/")
+        return redirect("/")
