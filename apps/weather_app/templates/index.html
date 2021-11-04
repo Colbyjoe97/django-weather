@@ -15,7 +15,7 @@
             <h3>Weather App</h3>
         </div>
         <div class="header-right">
-            <a href="">Login</a>
+            <a href="/login">Login</a>
         </div>
     </div>
     <div class="wrapper">
@@ -32,31 +32,7 @@
             <h3>favorites placeholder</h3>
             <h3>favorites placeholder</h3>
         </div>
-        {% if messages %}
-            <div>
-            {% for message in messages %}
-                <p class='text-danger'>{{ message }}</p>
-            {% endfor %}
-            </div>
-        {% endif %}
         
-        {% for user in users %}
-            <p>{{user.first_name}} {{user.last_name}}</p>
-        {% endfor %}
-        <form action="register" method="POST">
-            {% csrf_token %}
-            <p>First Name:</p>
-            <input type="text" name="fname">
-            <p>Last Name:</p>
-            <input type="text" name="lname">
-            <p>Email:</p>
-            <input type="text" name="email">
-            <p>Password:</p>
-            <input type="text" name="pass">
-            <p>Password Confirmation:</p>
-            <input type="text" name="confirmPass"><br>
-            <input type="submit" value="Register" id="register">
-        </form>
     </div>
 </body>
 </html>
