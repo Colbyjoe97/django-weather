@@ -10,6 +10,8 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def login(request):
+    return render(request, 'login.html')
 
 def register(request):
     errors = User.objects.registrationValidator(request.POST)
