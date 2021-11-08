@@ -19,14 +19,16 @@
         </div>
     </div>
     
+    {{ api }}
     <div class="wrapper">
         <div class="weather">
             <form action="weather" method="POST">
                 <input type="text" name="city" id="city" placeholder="City Name">
                 <input type="submit" value="Get Weather" id="button">
             </form>
-            {{weather.temp}}
-            {{weather.city}} - {{weather.country_code}}
+            {{weather.temp_c}} / {{weather.temp_f}}
+            {{weather.city}} - {{weather.country_code}} <br>  
+            {{ weather.weather_type }}
         </div>
         <div class="favorites">
             <h3>favorites placeholder</h3>
