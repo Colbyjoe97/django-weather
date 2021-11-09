@@ -8,15 +8,19 @@ def index(request):
     # city = request.POST['city']
     url = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q=sykesville&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
     data_list = json.loads(url)
+    
     temp_c = round(int(data_list['main']['temp']) - 273.1)
     temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
+
     data = {
         'city': str(data_list['name']),
         "country_code": str(data_list['sys']['country']),
         'temp_c': str(temp_c) + ' °C',
         'temp_f': str(temp_f) + ' °F',
         'weather_type': str(data_list['weather'][0]['main'])
-    }   
+    }
+
+
     context={
         'users': User.objects.all(),
         'weather': data,
