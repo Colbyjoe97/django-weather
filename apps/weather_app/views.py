@@ -14,26 +14,30 @@ def index(request):
 
 def weather(request):
     city = request.POST['city']
-
-    if len(city) > 0:
+    newCity = ""
+    for i in range(0, len(city)):
+        if city[i] == " ":
+            newCity += "+"
+        else:
+            newCity += city[i]
+    if len(newCity) > 0:
         try:
-            url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
-        except HTTPError as err:
-            if err.code == 404:
-                messages.error(request, "Please enter a valid city.")
-            else:
-                data_list = json.loads(url)
+            url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={newCity}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
+            data_list = json.loads(url)
                 
-                temp_c = round(int(data_list['main']['temp']) - 273.1)
-                temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
+            temp_c = round(int(data_list['main']['temp']) - 273.1)
+            temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
 
-                request.session['current_city'] = {
-                    'city': str(data_list['name']),
-                    "country_code": str(data_list['sys']['country']),
-                    'temp_c': str(temp_c) + ' °C',
-                    'temp_f': str(temp_f) + ' °F',
-                    'weather_type': str(data_list['weather'][0]['main'])
-                }
+            request.session['current_city'] = {
+                'city': str(data_list['name']),
+                "country_code": str(data_list['sys']['country']),
+                'temp_c': str(temp_c) + ' °C',
+                'temp_f': str(temp_f) + ' °F',
+                'weather_type': str(data_list['weather'][0]['main'])
+            }
+        except urllib.error.HTTPError as err:
+            if err.code:
+                messages.error(request, "Please enter a valid city.")
     else:
         messages.error(request, "City is required.")
     return redirect('/')
