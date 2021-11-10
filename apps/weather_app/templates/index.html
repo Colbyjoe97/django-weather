@@ -22,15 +22,24 @@
     {{ api }}
     <div class="wrapper">
         <div class="weather">
+            {% if messages %}
+                <div>
+                {% for message in messages %}
+                    <p class='text-danger'>{{ message }}</p>
+                {% endfor %}
+                </div>
+            {% endif %}
             <form action="weather" method="POST">
+                {% csrf_token %}
                 <input type="text" name="city" id="city" placeholder="City Name">
                 <input type="submit" value="Get Weather" id="button">
             </form>
             <div class="stat_box">
                 <div class="stats">
-                    {{weather.temp_c}} / {{weather.temp_f}}
-                    {{weather.city}} - {{weather.country_code}} <br>  
-                    {{ weather.weather_type }}
+                    {{request.session.test}}
+                    <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
+                    {{request.session.current_city.city}} - {{request.session.current_city.country_code}} <br>  
+                    {{ request.session.current_city.weather_type }}
                 </div>
             </div>
         </div>

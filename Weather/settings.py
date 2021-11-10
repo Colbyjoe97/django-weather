@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Weather.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'weather',
+        'NAME': 'Weather',
         'USER': 'admin',
         'PASSWORD': 'admin',
     }
