@@ -31,8 +31,8 @@ def weather(request):
             request.session['current_city'] = {
                 'city': str(data_list['name']),
                 "country_code": str(data_list['sys']['country']),
-                'temp_c': str(temp_c) + ' °C',
-                'temp_f': str(temp_f) + ' °F',
+                'temp_c': str(temp_c) + '°C',
+                'temp_f': str(temp_f) + '°F',
                 'weather_type': str(data_list['weather'][0]['main'])
             }
         except urllib.error.HTTPError as err:

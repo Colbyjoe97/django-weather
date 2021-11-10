@@ -36,7 +36,6 @@
             </form>
             <div class="stat_box">
                 <div class="stats">
-                    {{request.session.test}}
                     <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
                     {{request.session.current_city.city}} - {{request.session.current_city.country_code}} <br>  
                     {{ request.session.current_city.weather_type }}
