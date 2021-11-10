@@ -4,7 +4,6 @@
 }
 .wrapper {
     padding: 20px 20% 0px 20%;
-    min-height: 100vh;
     display: flex;
     justify-content: space-between;
 }
