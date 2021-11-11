@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+# from django.apps import AppConfig
 
 
-class WeatherAppConfig(AppConfig):
-    name = 'weather_app'
+# class WeatherAppConfig(AppConfig):
+#     name = 'weather_app'
