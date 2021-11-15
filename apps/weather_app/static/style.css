@@ -71,9 +71,9 @@
     border: 0px;
     background-color: rgb(26, 190, 163);
     color: white;
-    transition: 0.3s;
+    transition: 0.6s;
 }
 #button:hover {
-    background-color: rgb(73, 175, 223);
-    transition: 0.3s;
+    background-color: rgb(68, 111, 230);
+    transition: 0.6s;
 }
