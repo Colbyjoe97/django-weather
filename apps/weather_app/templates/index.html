@@ -33,9 +33,9 @@
                 <input type="submit" value="Get Weather" id="button">
             </form>
             <div class="stat_box">
-                <div class="stats">
+                <div>
                     <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
-                    <p>{{request.session.current_city.city}} - {{request.session.current_city.country_code}}</p> 
+                    <p>{{request.session.current_city.city}} - {{request.session.current_city.country_code}}</p>
                     <p>{{ request.session.current_city.weather_type }}</p>
                 </div>
             </div>
