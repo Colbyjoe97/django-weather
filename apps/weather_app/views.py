@@ -5,7 +5,6 @@ import bcrypt, urllib.request, json
 from urllib.error import HTTPError
 
 
-# Create your views here.
 def index(request):
     context={
         'users': User.objects.all(),
