@@ -9,17 +9,7 @@
     background-color: rgb(26, 190, 163);
     color: white;
 }
-.header-right{
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-    text-align: right;
-}
-.header-right a {
-    color: white;
-    text-decoration: none;
-}
-.header-left h3 a {
+a {
     color: white;
     text-decoration: none;
 }
