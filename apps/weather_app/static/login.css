@@ -1,0 +1,5 @@
+.wrapper {
+    padding: 0px 20% 0px 20%;
+    display: flex;
+    justify-content: space-evenly;
+}
