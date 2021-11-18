@@ -6,4 +6,28 @@
     padding: 0px 20% 0px 20%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+.submit {
+    background-color: rgb(26, 190, 163);
+    padding: 7px;
+    border-radius: 10px;
+    border: 0;
+}
+.login, .register {
+    border: 1px solid black;
+    padding: 10px;
+    height: 100%;
+    margin-right: 10px;
+}
+
+input {
+    width: 100%;
+    border-radius: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+p {
+    margin-bottom: 0px;
+    margin-top: 1rem;
 }

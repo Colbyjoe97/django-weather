@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
@@ -19,6 +20,9 @@
             </div>
         {% endif %}
         <div class="register">
+            <div class="text-center">
+                <h1>Register</h1>
+            </div>
             <form action="register" method="POST">
                 {% csrf_token %}
                 <p>First Name:</p>
@@ -31,17 +35,20 @@
                 <input type="text" name="pass">
                 <p>Password Confirmation:</p>
                 <input type="text" name="confirmPass"><br><br>
-                <input type="submit" value="Register" id="register">
+                <input type="submit" value="Register" class="submit" id="register">
             </form>
         </div>
         <div class="login">
-            <form action="register" method="POST">
+            <div class="text-center">
+                <h1>Login</h1>
+            </div>
+            <form action="login" method="POST">
                 {% csrf_token %}
                 <p>Email:</p>
                 <input type="text" name="email">
                 <p>Password:</p>
                 <input type="text" name="pass"><br><br>
-                <input type="submit" value="Login" id="register">
+                <input type="submit" value="Login" class="submit" id="login">
             </form>
         </div>
     </div>
