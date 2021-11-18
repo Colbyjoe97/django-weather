@@ -3,31 +3,12 @@
     padding: 0px;
 }
 .wrapper {
-    padding: 20px 20% 0px 20%;
+    padding: 0px 20% 0px 20%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.header{
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-    font-size: larger;
-    padding: 10px 20% 10px 20%;
-    height: 70px;
-    background-color: rgb(26, 190, 163);
-    color: white;
-}
-.header-right{
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-    text-align: right;
-}
-.header-right a {
-    color: white;
-    text-decoration: none;
-}
+
 .weather{
     text-align: center;
     height: 100%;
