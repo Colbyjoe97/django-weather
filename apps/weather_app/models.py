@@ -31,6 +31,26 @@ class UserManager(models.Manager):
 
         return errors
 
+    def loginValidator(self, postData):
+        matchingEmail = User.objects.filter(email=postData['email'])
+        errors = {}
+
+        if len(postData['email']) == 0:
+            errors['email'] = "Email is required"
+        elif len(matchingEmail) == 0:
+            errors['email'] = "Email is not yet registered"
+
+        if len(postData['pass']) == 0:
+            errors['pass'] = "Password is required"
+        elif not bcrypt.checkpw(postData['pass'].encode(), matchingEmail[0].password.encode()):
+            errors['pass'] = "Password is incorrect"
+
+        return errors
+
+class Favorite(models.Model):
+    city=models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class User(models.Model):
     first_name=models.CharField(max_length=255)
@@ -39,4 +59,5 @@ class User(models.Model):
     password=models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    favorites=models.ManyToManyField(Favorite, related_name="users")
     objects = UserManager()
