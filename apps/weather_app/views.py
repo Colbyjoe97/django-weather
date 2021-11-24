@@ -8,6 +8,7 @@ from urllib.error import HTTPError
 def index(request):
     context={
         'users': User.objects.all(),
+        'current_user': User.objects.get(id=request.session['current_user']),
     }
     return render(request, 'index.html', context)
 
@@ -45,9 +46,19 @@ def weather(request):
 
 
 
-def login(request):
+def login_page(request):
     return render(request, 'login.html')
 
+def login(request):
+    errors = User.objects.loginValidator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/login')
+    else:
+        user = User.objects.filter(email=request.POST['email'])
+        request.session['current_user'] = user[0].id
+        return redirect('/')
 
 
 def register(request):
