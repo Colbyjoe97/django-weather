@@ -15,7 +15,6 @@
     text-align: center;
     height: 100%;
     /* border: 1px solid black; */
-    flex: 1;
 }
 
 .stat_box {
@@ -28,7 +27,6 @@
 .stat_box-top img {
     width: 30px;
     text-align: right;
-    cursor: pointer;
 }
 .stat_box-bottom {
     align-items: center;
@@ -39,9 +37,23 @@
     height: 50px;
 }
 .favorites {
-    /* border: 1px solid black; */
-    flex: 1;
     text-align: right;
+    width: 40%;
+}
+.borderless {
+    border: 0px;
+}
+.favorite{
+    border: 1px solid rgb(143, 141, 141);
+    border-radius: 20px;
+    box-shadow: 2px 2px rgb(143, 141, 141);
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.favorite-right img {
+    width: 20px;
+    cursor: pointer;
 }
 #city {
     border-radius: 10px;
