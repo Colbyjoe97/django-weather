@@ -27,8 +27,11 @@
             </form>
             <div class="stat_box">
                 <div class="stat_box-top text-right mb-4">
-                    <form action="/favorite">
-                        <img src="../static/images/unfavorited.png" alt="">
+                    <form action="/favorite" method="POST">
+                        {% csrf_token %}
+                        <button class="borderless">
+                            <img src="../static/images/unfavorited.png" alt="">
+                        </button>
                         <input type="hidden" name="city" value="{{request.session.current_city.city}}">
                     </form>
                 </div>
@@ -42,13 +45,29 @@
             </div>
         </div>
         <div class="favorites">
-            {{ current_user.first_name }}
-            <h3>favorites placeholder</h3>
-            <h3>favorites placeholder</h3>
-            <h3>favorites placeholder</h3>
-            <h3>favorites placeholder</h3>
-            <h3>favorites placeholder</h3>
+            {% if request.session.current_user %}
+                {%for favorite in favorites%}
+                <div class="favorite flexed">
+                    <div class="favorite-left">
+                        <p>{{favorite.city}}</p>
+                        <p>{{favorite.temp_c}}</p>
+                        <p>{{favorite.temp_f}}</p>
+                        <p>{{favorite.id}}</p>
+                    </div>
+                    <div class="favorite-right">
+                        <form action="/delete" method="POST">
+                            {% csrf_token %}
+                            <button class="borderless">
+                                <img src="../static/images/delete.png" alt="">
+                            </button>
+                            <input type="hidden" name="city" value="{{favorite.id}}">
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
+    
 </body>
 </html>
