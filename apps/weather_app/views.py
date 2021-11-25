@@ -6,10 +6,37 @@ from urllib.error import HTTPError
 
 
 def index(request):
-    context={
-        'users': User.objects.all(),
-        'current_user': User.objects.get(id=request.session['current_user']),
-    }
+    if 'current_user' in request.session:
+        current_user = User.objects.get(id=request.session['current_user'])
+        favorites = current_user.favorites.all()
+        request.session['favorites'] = []
+
+        for favorite in favorites:
+            url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={favorite.city}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
+            data_list = json.loads(url)
+                
+            temp_c = round(int(data_list['main']['temp']) - 273.1)
+            temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
+
+            city = {
+                'city': str(data_list['name']),
+                "country_code": str(data_list['sys']['country']),
+                'temp_c': str(temp_c) + '°C',
+                'temp_f': str(temp_f) + '°F',
+                'weather_type': str(data_list['weather'][0]['main']),
+                'id': favorite.id
+            }
+            request.session['favorites'].append(city)
+
+        context={
+            'users': User.objects.all(),
+            'current_user': current_user,
+            'favorites': request.session['favorites']
+        }
+    else:
+        context={
+            'users': User.objects.all(),
+        }
     return render(request, 'index.html', context)
 
 
@@ -44,6 +71,21 @@ def weather(request):
         messages.error(request, "City is required.")
     return redirect('/')
 
+
+def favorite(request):
+    if request.session['current_user']:
+        user = User.objects.get(id=request.session['current_user'])
+        city = Favorite.objects.create(city=request.POST['city'])
+        user.favorites.add(city)
+    return redirect('/')
+
+
+def delete(request):
+    if request.session['current_user']:
+        city = request.POST['city']
+        user = User.objects.get(id=request.session['current_user'])
+        user.favorites.remove(Favorite.objects.get(id=city))
+    return redirect('/')
 
 
 def login_page(request):
