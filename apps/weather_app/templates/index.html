@@ -35,6 +35,7 @@
                         <input type="hidden" name="city" value="{{request.session.current_city.city}}">
                     </form>
                 </div>
+                {% if request.session.current_city %}
                 <div class="stat_box-bottom flexed">
                     <div>
                         <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
@@ -42,6 +43,7 @@
                         <p>{{ request.session.current_city.weather_type }}</p>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
         <div class="favorites">
