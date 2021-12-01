@@ -80,3 +80,19 @@
     background-color: rgb(68, 111, 230);
     transition: 0.6s;
 }
+
+
+
+
+@media(max-width: 771px) {
+    .wrapper {
+        flex-direction: column;
+        padding: 4%;
+    }
+    .weather {
+        margin: 0px;
+    }
+    .stat_box {
+        margin-bottom: 10px;
+    }
+}
