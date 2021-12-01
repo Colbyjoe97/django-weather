@@ -30,12 +30,14 @@
     width: 20px;
     text-align: right;
 }
-.stat_box-bottom {
-    align-items: center;
+.stat_box_bottom {
     justify-content: center;
 }
+.stat_box_bottom h1 {
+    font-size: 50px;
+}
 .stat_box-top {
-    height: 50px;
+    height: 40px;
 }
 .favorites {
     text-align: right;
