@@ -6,7 +6,7 @@
     display: flex;
 }
 .wrapper {
-    padding: 0px 20% 0px 20%;
+    padding: 0px 10% 0px 10%;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -14,6 +14,8 @@
 .weather{
     text-align: center;
     height: 100%;
+    flex: 1;
+    margin-right: 10%;
     /* border: 1px solid black; */
 }
 
@@ -25,20 +27,20 @@
     height: 300px;
 }
 .stat_box-top img {
-    width: 30px;
+    width: 20px;
     text-align: right;
 }
 .stat_box-bottom {
     align-items: center;
     justify-content: center;
-
 }
 .stat_box-top {
     height: 50px;
 }
 .favorites {
     text-align: right;
-    width: 40%;
+    flex: 1;
+    /* width: 40%; */
 }
 .borderless {
     border: 0px;
