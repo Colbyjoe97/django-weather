@@ -34,6 +34,11 @@
                             <img src="../static/images/unfavorited.png" alt="">
                         </button>
                         <input type="hidden" name="city" value="{{request.session.current_city.city}}">
+                        {% for favorite in favorites %}
+                            {% if favorite.city == request.session.current_city.city %}
+                                <input type="hidden" name="city_id" value="{{favorite.id}}">
+                            {% endif %}
+                        {% endfor %}
                     </form>
                 </div>
                 <div class="stat_box-bottom flexed">
