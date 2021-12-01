@@ -11,30 +11,19 @@ def index(request):
         favorites = user.favorites.all()
         request.session['favorites'] = []
         favorited = False
-        
-        if request.session['current_city']:
-            for favorite in user.favorites.all():
-                if favorite.city == request.session['current_city']['city']:
-                    favorited = True
 
-            # if favorited == False:
-            #         request.session['current_city'] = {
-            #             'city': str(data_list['name']),
-            #             "country_code": str(data_list['sys']['country']),
-            #             'temp_c': str(temp_c) + '°C',
-            #             'temp_f': str(temp_f) + '°F',
-            #             'weather_type': str(data_list['weather'][0]['main']),
-            #             'img': '../static/images/unfavorited.png'
-            #         }
-            # else:
-            #     request.session['current_city'] = {
-            #         'city': str(data_list['name']),
-            #         "country_code": str(data_list['sys']['country']),
-            #         'temp_c': str(temp_c) + '°C',
-            #         'temp_f': str(temp_f) + '°F',
-            #         'weather_type': str(data_list['weather'][0]['main']),
-            #         'img': '../static/images/favorited.png'
-            #     }
+        if 'current_city' in request.session:
+            city = request.session['current_city']['city']
+            newCity = ""
+            for i in range(0, len(city)):
+                if city[i] == " ":
+                    newCity += "+"
+                else:
+                    newCity += city[i]
+                    
+            for favorite in user.favorites.all():
+                if favorite.city == request.session['current_city']['city'] or favorite.city == newCity:
+                    favorited = True
 
         
         for favorite in favorites:
@@ -71,7 +60,6 @@ def index(request):
 def weather(request):
     city = request.POST['city']
     newCity = ""
-    user = User.objects.get(id=request.session['current_user'])
     for i in range(0, len(city)):
         if city[i] == " ":
             newCity += "+"
@@ -104,20 +92,29 @@ def weather(request):
 
 
 def favorite(request):
-    if request.session['current_user']:
+    if 'current_user' in request.session:
         user = User.objects.get(id=request.session['current_user'])
         city = request.POST['city']
         favorited = False
+        newCity = ""
+
+        for i in range(0, len(city)):
+            if city[i] == " ":
+                newCity += "+"
+            else:
+                newCity += city[i]
+                
         for favorite in user.favorites.all():
-            if favorite.city == city:
+            if favorite.city == newCity:
                 favorited = True
 
         if favorited == False:
-            city = Favorite.objects.create(city=request.POST['city'])
-            user.favorites.add(city)
+            newCity = Favorite.objects.create(city=newCity)
+            user.favorites.add(newCity)
         else:
             user.favorites.remove(Favorite.objects.get(id=request.POST['city_id']))
-
+    else:
+        messages.error(request, "You must be logged in to do that!")
     return redirect('/')
 
 
