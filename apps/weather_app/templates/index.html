@@ -25,6 +25,7 @@
                 <input type="text" name="city" id="city" placeholder="City Name..">
                 <input type="submit" value="Get Weather" id="button">
             </form>
+            {% if request.session.current_city %}
             <div class="stat_box">
                 <div class="stat_box-top text-right mb-4">
                     <form action="/favorite" method="POST">
@@ -35,7 +36,6 @@
                         <input type="hidden" name="city" value="{{request.session.current_city.city}}">
                     </form>
                 </div>
-                {% if request.session.current_city %}
                 <div class="stat_box-bottom flexed">
                     <div>
                         <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
@@ -43,8 +43,8 @@
                         <p>{{ request.session.current_city.weather_type }}</p>
                     </div>
                 </div>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
         <div class="favorites">
             {% if request.session.current_user %}
