@@ -75,8 +75,18 @@ def weather(request):
 def favorite(request):
     if request.session['current_user']:
         user = User.objects.get(id=request.session['current_user'])
-        city = Favorite.objects.create(city=request.POST['city'])
-        user.favorites.add(city)
+        city = request.POST['city']
+        favorited = False
+        for favorite in user.favorites.all():
+            if favorite.city == city:
+                favorited = True
+
+        if favorited == False:
+            city = Favorite.objects.create(city=request.POST['city'])
+            user.favorites.add(city)
+        else:
+            user.favorites.remove(Favorite.objects.get(id=request.POST['city_id']))
+
     return redirect('/')
 
 
