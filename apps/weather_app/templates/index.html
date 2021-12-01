@@ -31,7 +31,11 @@
                     <form action="/favorite" method="POST">
                         {% csrf_token %}
                         <button class="borderless">
-                            <img src="../static/images/unfavorited.png" alt="">
+                            {% if favorited == True %}
+                                <img src="../static/images/favorited.png" alt="">
+                            {% else %}
+                                <img src="../static/images/unfavorited.png" alt="">
+                            {% endif %}
                         </button>
                         <input type="hidden" name="city" value="{{request.session.current_city.city}}">
                         {% for favorite in favorites %}
