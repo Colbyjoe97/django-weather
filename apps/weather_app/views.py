@@ -7,10 +7,36 @@ from urllib.error import HTTPError
 
 def index(request):
     if 'current_user' in request.session:
-        current_user = User.objects.get(id=request.session['current_user'])
-        favorites = current_user.favorites.all()
+        user = User.objects.get(id=request.session['current_user'])
+        favorites = user.favorites.all()
         request.session['favorites'] = []
+        favorited = False
+        
+        if request.session['current_city']:
+            for favorite in user.favorites.all():
+                if favorite.city == request.session['current_city']['city']:
+                    favorited = True
 
+            # if favorited == False:
+            #         request.session['current_city'] = {
+            #             'city': str(data_list['name']),
+            #             "country_code": str(data_list['sys']['country']),
+            #             'temp_c': str(temp_c) + '°C',
+            #             'temp_f': str(temp_f) + '°F',
+            #             'weather_type': str(data_list['weather'][0]['main']),
+            #             'img': '../static/images/unfavorited.png'
+            #         }
+            # else:
+            #     request.session['current_city'] = {
+            #         'city': str(data_list['name']),
+            #         "country_code": str(data_list['sys']['country']),
+            #         'temp_c': str(temp_c) + '°C',
+            #         'temp_f': str(temp_f) + '°F',
+            #         'weather_type': str(data_list['weather'][0]['main']),
+            #         'img': '../static/images/favorited.png'
+            #     }
+
+        
         for favorite in favorites:
             url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={favorite.city}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
             data_list = json.loads(url)
@@ -30,8 +56,9 @@ def index(request):
 
         context={
             'users': User.objects.all(),
-            'current_user': current_user,
-            'favorites': request.session['favorites']
+            'current_user': user,
+            'favorites': request.session['favorites'],
+            'favorited': favorited
         }
     else:
         context={
@@ -44,6 +71,7 @@ def index(request):
 def weather(request):
     city = request.POST['city']
     newCity = ""
+    user = User.objects.get(id=request.session['current_user'])
     for i in range(0, len(city)):
         if city[i] == " ":
             newCity += "+"
@@ -53,6 +81,8 @@ def weather(request):
         try:
             url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={newCity}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
             data_list = json.loads(url)
+
+            
                 
             temp_c = round(int(data_list['main']['temp']) - 273.1)
             temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
@@ -64,6 +94,7 @@ def weather(request):
                 'temp_f': str(temp_f) + '°F',
                 'weather_type': str(data_list['weather'][0]['main'])
             }
+
         except urllib.error.HTTPError as err:
             if err.code:
                 messages.error(request, "Please enter a valid city.")
