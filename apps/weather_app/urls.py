@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^user-login', views.login),
     url(r'^favorite$', views.favorite),
     url(r'^delete$', views.delete),
+    url(r'^logout$', views.logout)
 ]

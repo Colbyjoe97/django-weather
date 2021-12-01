@@ -155,3 +155,7 @@ def register(request):
         User.objects.create(first_name=request.POST['fname'],last_name=request.POST['lname'],email=request.POST['email'],password=hashedPass)
         return redirect("/")
 
+
+def logout(request):
+    del request.session['current_user']
+    return redirect('/')
