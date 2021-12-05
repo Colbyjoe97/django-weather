@@ -55,6 +55,12 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
+.favorite-left {
+    width: 10%;
+}
+.favorite-middle {
+    text-align: left;
+}
 .favorite-right img {
     width: 20px;
     cursor: pointer;
