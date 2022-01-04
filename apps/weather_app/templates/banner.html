@@ -14,11 +14,11 @@
             <h3><a href="/">Weather App</a></h3>
         </div>
         <div class="header-right">
-            {% if not current_user %}
-                <a href="/login">Login</a>
-            {% else %}
-                <a href="/logout">Logout</a>
-            {% endif %}
+        {% if not current_user %}
+            <a href="/login">Login</a>
+        {% else %}
+            <a href="/logout">Logout</a>
+        {% endif %}
         </div>
     </div>
 </body>
