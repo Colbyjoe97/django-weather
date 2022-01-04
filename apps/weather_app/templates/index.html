@@ -15,47 +15,47 @@
     {% include 'banner.html' %}
     <div class="wrapper flexed">
         <div class="weather">
-            {% if messages %}
+        {% if messages %}
+            <div>
+            {% for message in messages %}
+                <p class='text-danger'>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        <form action="weather" method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" id="city" placeholder="City Name..">
+            <input type="submit" value="Get Weather" id="button">
+        </form>
+        {% if request.session.current_city %}
+        <div class="stat_box">
+            <div class="stat_box-top text-right mb-4">
+                <form action="/favorite" method="POST">
+                    {% csrf_token %}
+                    <button class="borderless">
+                        {% if favorited == True %}
+                            <img src="../static/images/favorited.png" alt="">
+                        {% else %}
+                            <img src="../static/images/unfavorited.png" alt="">
+                        {% endif %}
+                    </button>
+                    <input type="hidden" name="city" value="{{request.session.current_city.city}}">
+                    {% for favorite in favorites %}
+                        {% if favorite.city == request.session.current_city.city %}
+                            <input type="hidden" name="city_id" value="{{favorite.id}}">
+                        {% endif %}
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="stat_box_bottom flexed">
                 <div>
-                {% for message in messages %}
-                    <p class='text-danger'>{{ message }}</p>
-                {% endfor %}
-                </div>
-            {% endif %}
-            <form action="weather" method="POST">
-                {% csrf_token %}
-                <input type="text" name="city" id="city" placeholder="City Name..">
-                <input type="submit" value="Get Weather" id="button">
-            </form>
-            {% if request.session.current_city %}
-            <div class="stat_box">
-                <div class="stat_box-top text-right mb-4">
-                    <form action="/favorite" method="POST">
-                        {% csrf_token %}
-                        <button class="borderless">
-                            {% if favorited == True %}
-                                <img src="../static/images/favorited.png" alt="">
-                            {% else %}
-                                <img src="../static/images/unfavorited.png" alt="">
-                            {% endif %}
-                        </button>
-                        <input type="hidden" name="city" value="{{request.session.current_city.city}}">
-                        {% for favorite in favorites %}
-                            {% if favorite.city == request.session.current_city.city %}
-                                <input type="hidden" name="city_id" value="{{favorite.id}}">
-                            {% endif %}
-                        {% endfor %}
-                    </form>
-                </div>
-                <div class="stat_box_bottom flexed">
-                    <div>
-                        <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
-                        <p>{{request.session.current_city.city}} - {{request.session.current_city.country_code}}</p>
-                        <p>{{ request.session.current_city.weather_type }}</p>
-                    </div>
+                    <h1>{{request.session.current_city.temp_c}} / {{request.session.current_city.temp_f}}</h1>
+                    <p>{{request.session.current_city.city}} - {{request.session.current_city.country_code}}</p>
+                    <p>{{ request.session.current_city.weather_type }}</p>
                 </div>
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         </div>
         <div class="favorites">
         {% if request.session.current_user %}
