@@ -58,28 +58,28 @@
             {% endif %}
         </div>
         <div class="favorites">
-            {% if request.session.current_user %}
-                {%for favorite in favorites%}
-                <div class="favorite flexed">
-                    <div class="favorite-left">
-                        <p>placeholder</p>
-                    </div>
-                    <div class="favorite-middle">
-                        <p>{{favorite.city}}</p>
-                        <p>{{favorite.temp_c}} / {{favorite.temp_f}}</p>
-                    </div>
-                    <div class="favorite-right">
-                        <form action="/delete" method="POST">
-                            {% csrf_token %}
-                            <button class="borderless">
-                                <img src="../static/images/delete.png" alt="">
-                            </button>
-                            <input type="hidden" name="city" value="{{favorite.id}}">
-                        </form>
-                    </div>
+        {% if request.session.current_user %}
+            {%for favorite in favorites%}
+            <div class="favorite flexed">
+                <div class="favorite-left">
+                    <p>placeholder</p>
                 </div>
-                {% endfor %}
-            {% endif %}
+                <div class="favorite-middle">
+                    <p>{{favorite.city}}</p>
+                    <p>{{favorite.temp_c}} / {{favorite.temp_f}}</p>
+                </div>
+                <div class="favorite-right">
+                    <form action="/delete" method="POST">
+                        {% csrf_token %}
+                        <button class="borderless">
+                            <img src="../static/images/delete.png" alt="">
+                        </button>
+                        <input type="hidden" name="city" value="{{favorite.id}}">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
 </body>
