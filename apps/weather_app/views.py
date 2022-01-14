@@ -70,8 +70,7 @@ def weather(request):
             url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={newCity}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
             data_list = json.loads(url)
 
-            
-                
+                 
             temp_c = round(int(data_list['main']['temp']) - 273.1)
             temp_f = round((int(data_list['main']['temp']) - 273.15) * 9/5 + 32)
 
