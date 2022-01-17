@@ -4,7 +4,6 @@ from .models import *
 import bcrypt, urllib.request, json
 from urllib.error import HTTPError
 
-
 def index(request):
     if 'current_user' in request.session:
         user = User.objects.get(id=request.session['current_user'])
