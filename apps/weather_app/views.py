@@ -125,6 +125,7 @@ def delete(request):
 def login_page(request):
     return render(request, 'login.html')
 
+
 def login(request):
     errors = User.objects.loginValidator(request.POST)
     if len(errors) > 0:
