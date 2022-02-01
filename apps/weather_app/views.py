@@ -153,3 +153,4 @@ def register(request):
 def logout(request):
     del request.session['current_user']
     return redirect('/')
+
