@@ -24,7 +24,7 @@ def index(request):
                 if favorite.city == request.session['current_city']['city'] or favorite.city == newCity:
                     favorited = True
 
-        
+
         for favorite in favorites:
             url = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={favorite.city}&appid=5ef4efe8fd1e3cf0ddbcee4989acfeda').read()
             data_list = json.loads(url)
