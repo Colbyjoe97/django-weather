@@ -54,7 +54,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-
 def weather(request):
     city = request.POST['city']
     newCity = ""
